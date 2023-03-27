@@ -6,19 +6,29 @@ let email = [
     "massimocolella4@libero.it"
 ]
 
-//Al click del bottone controlla se la mail è nell'array e scrivi un messaggio appropriato
 function submit(){
+
+    //Variabili
     let emailUtente = document.querySelector('#emailUtente').value;
     let soldatino = false
+    let filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;  
 
+    //Controllo email valida
+     if (!filter.test(emailUtente)) {  
+        alert('Immetti un indirizzo email valido');  
+        email.focus;  
+        return false;  
+    }  
+
+    //Controllo mail se è nell'array con testo annesso
     for( let i=0; i< email.length; i++ ){
         if( email[i] == emailUtente ){
             soldatino = true
         }
     }
     if(soldatino){
-        document.querySelector('.container').innerHTML+= `<div class="text-danger">${emailUtente} esiste</div>`
+        document.querySelector('#email-result').innerHTML= `${emailUtente} esiste</div>`
     } else{
-        document.querySelector('.container').innerHTML+= `<div class="text-danger">${emailUtente} non esiste</div>`
+        document.querySelector("#email-result").innerHTML= `${emailUtente} non esiste</div>`
     }
 }
